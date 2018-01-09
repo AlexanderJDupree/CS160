@@ -1,0 +1,61 @@
+CLASS                   VARIABLE w/ DATA TYPE:              DESCRIPTION:
+Players                 Class object                        Player class
+    Methods:
+    __init__,           health:int, inventory:list          initalizes player object
+    read_inventory,     self                                iterates through inventory, print to screen
+    add_item,           self, item: Item Object             Appends item object to inventory
+    remove_item         self, item: Item Object             Removes item object from inventory
+    get_item            self, item_name: string             Returns item object from inventory
+    combat              self, enemy : Enemy Object          Runs combat loop
+
+Room                    Class object                         Room class
+    Methods:
+    __init__        room_title:string, room_branches:list, counter: list, events: list, items:list
+                    events: list
+
+                    Parses text file and assign corresponding attributes to Room object
+
+    enter_room          self,                               Runs enter room sequence
+    next_room           self, room_title: string            Initializes next room
+    increment_counter   self,                               Updates room counter
+    get_room_actions    self                                Returns list of special actions
+
+Actions                 Class object                        Creates action object based on input
+    Methods:
+    __init__,           verb:string, verb:noun              initializes action object
+    run_action          self, object: Object list           evaluates user input and creates runs action
+    goto                self, object: Room object           moves player to specified room
+    drink               self, object: Room object           special action to drink if available
+    inventory           self, object: Player object         links to Player read_inventory() method
+    pickup              self, object: Room,Player object    links to Player add_item() method
+    examine             self, object: Room,Player object    checks if item exists, print description
+    use                 self, object: Player,Item object    runs item function if available
+
+Items                   Class object                             Item class
+    Methods:
+    __init__       item_name: string,, uses: int, func: string, pickup: Boolean, description: string
+
+                   Grabs item attributes from text file.
+
+    examine_item        self                                    prints item description
+    use_item            self, object:Player object              runs items funciton if available
+    decrement_uses      self, object:Player object              decrements items uses, removes item from player if uses=0
+    heal                self, object:Player object              restore player health
+    light               self, object:Room object                changes Room attribute to light if used
+    load_gun            self, object:Player object              updates weapon uses by number of bullets in inventory
+
+Enemy(Player)           Class object                            Creates enemy object, inherits from Player class
+    Methods:
+    __init__            health: int, inventory: list, Grabs enemy attributes from text file
+
+GlOBAL METHODS:
+
+    main                                                        runs main game loop
+    get_input           prompt:string, room:Room object         grabs special actions from room, updates action list,
+                                                                listen for input, parse and return input for Action class
+
+    reset_game_file     filename: string                        resets world state in game file
+    parse_file      filename:string, key:string, target:string  searches game file for specific attribtues, return attributes
+    change_boolean  filename:string, key:string, target:string  special method for changing only boolean values in game file
+
+    death               message: string                         runs death sequence, exits program
